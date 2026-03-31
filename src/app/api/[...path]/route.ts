@@ -156,14 +156,15 @@ function emptyGet(path: string) {
   if (path === "notifications") {
     return NextResponse.json({ notifications: [], unread_count: 0 });
   }
+  // FastAPI returns a raw array for both endpoints (not { conversations: [...] }).
   if (path === "messages/conversations") {
-    return NextResponse.json({ conversations: [] });
+    return NextResponse.json([]);
   }
   if (path.startsWith("messages/") && path.endsWith("/thread")) {
-    return NextResponse.json({ messages: [] });
+    return NextResponse.json([]);
   }
   if (path.startsWith("messages/")) {
-    return NextResponse.json({ messages: [] });
+    return NextResponse.json([]);
   }
 
   return NextResponse.json({});

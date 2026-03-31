@@ -47,7 +47,9 @@ const MessagesPage = () => {
     const fetchConversations = async () => {
         try {
             const response = await axios.get(`${API}/messages/conversations`);
-            setConversations(response.data);
+            const data = response.data;
+            const list = Array.isArray(data) ? data : (data?.conversations ?? []);
+            setConversations(Array.isArray(list) ? list : []);
         } catch (error) {
             console.error('Error fetching conversations:', error);
         } finally { setLoading(false); }
@@ -68,7 +70,9 @@ const MessagesPage = () => {
     const fetchMessages = async (partnerId) => {
         try {
             const response = await axios.get(`${API}/messages/${partnerId}`);
-            setMessages(response.data);
+            const data = response.data;
+            const list = Array.isArray(data) ? data : (data?.messages ?? []);
+            setMessages(Array.isArray(list) ? list : []);
         } catch (error) { console.error('Error fetching messages:', error); }
     };
 
