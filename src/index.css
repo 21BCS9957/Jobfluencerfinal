@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 0%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 0%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 0%;
+        --primary: 0 0% 0%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 0 0% 96%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 0 0% 96%;
+        --muted-foreground: 0 0% 45%;
+        --accent: 0 0% 96%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 0% 0%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 0 0% 90%;
+        --input: 0 0% 90%;
+        --ring: 0 0% 0%;
+        --radius: 0rem;
+        --chart-1: 0 0% 20%;
+        --chart-2: 0 0% 40%;
+        --chart-3: 0 0% 60%;
+        --chart-4: 0 0% 80%;
+        --chart-5: 0 0% 90%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Glacial Indifference', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/*
+  3-TIER TYPE SYSTEM
+  - Heading:    35px / League Spartan / bold / uppercase
+  - Subheading: 18px / Poppins / semibold
+  - Body:       16px / Glacial Indifference / regular
+*/
+.text-xs,
+.text-sm,
+.text-base { font-size: 16px !important; line-height: 1.6 !important; font-family: 'Glacial Indifference', sans-serif !important; }
+
+.text-lg,
+.text-xl { font-size: 18px !important; line-height: 1.4 !important; font-family: 'Poppins', sans-serif !important; }
+
+.text-2xl,
+.text-3xl,
+.text-4xl,
+.text-5xl,
+.text-6xl { font-size: 35px !important; line-height: 1.1 !important; font-family: 'League Spartan', sans-serif !important; text-transform: uppercase !important; }
+
+/* Ensure heading weight is always bold */
+.font-bold, .font-extrabold, .font-black { font-weight: 700 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-medium { font-weight: 500 !important; }
+.font-normal, .font-light { font-weight: 400 !important; }
+
+code {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333;
+}
+
+/* Editorial Link Animation */
+.link-underline {
+    position: relative;
+}
+
+.link-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+    width: 100%;
+}
+
+/* Button Invert */
+.btn-invert {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-invert:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.btn-invert-white {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-invert-white:hover {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+/* Image Scale */
+.img-scale {
+    transition: transform 0.5s ease;
+}
+
+.img-scale:hover {
+    transform: scale(1.05);
+}
+
+/* Glass Effect Header */
+.glass-header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hard Shadow */
+.hard-shadow {
+    transition: box-shadow 0.2s ease;
+}
+
+.hard-shadow:hover {
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* Caption Style */
+.caption {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+/* Selection */
+::selection {
+    background-color: #000;
+    color: #fff;
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+}
+
+/* Bottom padding for fixed bottom nav */
+.pb-nav { padding-bottom: 70px; }
+main, .min-h-screen { padding-bottom: 70px; }
+
+@keyframes slide-in {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+.animate-slide-in {
+    animation: slide-in 0.25s ease-out;
+}

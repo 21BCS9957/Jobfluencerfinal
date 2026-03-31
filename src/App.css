@@ -1,0 +1,221 @@
+/* Jobfluencer Custom Styles */
+
+/* Editorial Card Hover */
+.editorial-card {
+    transition: border-color 0.3s ease;
+}
+
+.editorial-card:hover {
+    border-color: #000;
+}
+
+/* Profile Card */
+.profile-card {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card img {
+    transition: transform 0.5s ease;
+}
+
+.profile-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Input Minimal */
+.input-minimal {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+    padding: 1rem 0;
+    transition: border-color 0.3s ease;
+}
+
+.input-minimal:focus {
+    border-color: #000;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Stats Number */
+.stats-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Badge Minimal */
+.badge-minimal {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #000;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #000;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.sidebar a {
+    transition: background-color 0.2s ease;
+}
+
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Status Badge */
+.status-open {
+    background-color: #000;
+    color: #fff;
+}
+
+.status-in_progress {
+    background-color: #f3f4f6;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.status-completed {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+/* Chat Message */
+.chat-message-sent {
+    background-color: #000;
+    color: #fff;
+}
+
+.chat-message-received {
+    background-color: #f3f4f6;
+    color: #000;
+}
+
+/* Workspace Section */
+.workspace-section {
+    border: 1px solid #e5e7eb;
+    transition: border-color 0.3s ease;
+}
+
+.workspace-section:hover {
+    border-color: #000;
+}
+
+/* Rating Stars */
+.star-filled {
+    color: #000;
+}
+
+.star-empty {
+    color: #e5e7eb;
+}
+
+/* Tab Active */
+.tab-active {
+    border-bottom: 2px solid #000;
+}
+
+/* Animated Underline for Navigation */
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Loader */
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #e5e7eb;
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Page Transitions */
+.page-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Filter Tag */
+.filter-tag {
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-tag:hover,
+.filter-tag.active {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Milestone Progress */
+.milestone-completed {
+    background-color: #000;
+}
+
+.milestone-pending {
+    background-color: #e5e7eb;
+}
+
+/* Avatar */
+.avatar-bordered {
+    border: 2px solid #000;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 1px;
+    background-color: #e5e7eb;
+}
+
+/* Footer */
+.footer-dark {
+    background-color: #000;
+    color: #fff;
+}
+
+.footer-dark a:hover {
+    color: #9ca3af;
+}
