@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   env: {
     REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL ?? "",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+    ],
+  },
   turbopack: {
     resolveAlias: {
       "react-router-dom": "./src/lib/react-router-dom-compat.tsx",
