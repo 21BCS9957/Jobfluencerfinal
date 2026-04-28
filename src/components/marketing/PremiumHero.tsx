@@ -15,7 +15,7 @@ const trustItems = [
   { label: "Verified Brand Network", icon: ShieldCheck },
 ];
 
-const heroImage = "/hero-headphones-bench.png";
+const heroImage = "/hero-headphones-bench.jpg";
 
 const chatMessages = [
   "Hey, here are influencers for your campaign in your city locally.",

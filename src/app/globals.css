@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Why Choose Us — plane exhaust trail (scoped) */
+@keyframes trailFade {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleY(0.75);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.why-plane-trail > span {
+  animation: trailFade 1.2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.why-plane-trail > span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.why-plane-trail > span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.why-plane-trail > span:nth-child(3) {
+  animation-delay: 0.3s;
+}

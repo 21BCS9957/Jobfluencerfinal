@@ -6,10 +6,19 @@ const nextConfig: NextConfig = {
     REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL ?? "",
   },
   images: {
+    qualities: [75, 100],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "randomuser.me",
       },
     ],
   },

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
 
 @tailwind base;
@@ -50,6 +51,7 @@ body {
     color: #000000;
     font-size: 16px;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -210,4 +212,1371 @@ main, .min-h-screen { padding-bottom: 70px; }
 }
 .animate-slide-in {
     animation: slide-in 0.25s ease-out;
+}
+
+/* ManyChat-style How Jobfluencer Works scroll animation */
+#how-it-works {
+    height: 280vh;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.hiw-pin-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hiw-bg-image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hiw-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.hiw-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.hiw-yellow-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #FFE600;
+    opacity: 0;
+    will-change: opacity;
+}
+
+.hiw-marquee-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hiw-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    white-space: nowrap;
+    transform: translateX(100vw);
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.hiw-marquee-text {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(7rem, 15vw, 14rem);
+    font-weight: 900;
+    color: #FFE600;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    line-height: 0.9;
+    user-select: none;
+}
+
+.hiw-marquee-sep {
+    font-size: clamp(4rem, 8vw, 8rem);
+    color: #FFE600;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.hiw-final-content {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 36px 32px 48px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hiw-final-content.is-visible {
+    pointer-events: all;
+}
+
+.hiw-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+}
+
+.hiw-heading {
+    position: relative;
+    z-index: 1;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 900;
+    color: #000000;
+    text-align: center;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    text-transform: none;
+    transform: translateY(-30px);
+}
+
+.hiw-cards-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 16px;
+    width: 100%;
+    max-width: 1120px;
+}
+
+.hiw-card {
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 26px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    min-height: 260px;
+    position: relative;
+    transform: translateY(24px);
+    opacity: 0;
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.hiw-card:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+}
+
+.hiw-card::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #CCCCCC;
+}
+
+.hiw-card-icon {
+    width: 48px;
+    height: 48px;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.hiw-card-icon img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+}
+
+.hiw-card-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: #000000;
+    stroke-width: 2.2;
+    fill: none;
+}
+
+.hiw-card-title {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-transform: none;
+}
+
+.hiw-card-desc {
+    font-size: 0.875rem;
+    color: #555555;
+    line-height: 1.7;
+    flex: 1;
+}
+
+.hiw-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000000;
+    text-decoration: none;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+}
+
+.hiw-card-link:hover {
+    gap: 12px;
+}
+
+.hiw-nav-arrows {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.hiw-arrow {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid #000000;
+    background: transparent;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+    color: #000000;
+}
+
+.hiw-arrow:hover {
+    background: #000000;
+    color: #FFE600;
+}
+
+@media (max-width: 1180px) {
+    .hiw-final-content {
+        padding: 28px 24px 36px;
+    }
+
+    .hiw-heading {
+        font-size: clamp(2.3rem, 5vw, 3.4rem);
+        margin-bottom: 22px;
+    }
+
+    .hiw-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 760px;
+        gap: 12px;
+    }
+
+    .hiw-card {
+        min-height: 190px;
+        padding: 18px;
+        gap: 10px;
+    }
+
+    .hiw-card-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hiw-card-icon img {
+        width: 22px;
+        height: 22px;
+    }
+
+    .hiw-card-title {
+        font-size: 1rem;
+    }
+
+    .hiw-card-desc {
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .hiw-nav-arrows {
+        margin-top: 18px;
+    }
+
+    .hiw-arrow {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hiw-final-content {
+        justify-content: flex-start;
+        padding: 28px 14px 24px;
+        overflow-y: auto;
+    }
+
+    .hiw-cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .hiw-marquee-text {
+        font-size: 4.5rem;
+    }
+
+    .hiw-heading {
+        font-size: 1.85rem;
+        margin-bottom: 16px;
+    }
+
+    .hiw-card {
+        min-height: 170px;
+        padding: 14px;
+        gap: 8px;
+    }
+
+    .hiw-card-desc {
+        font-size: 0.72rem;
+        line-height: 1.28;
+    }
+
+    .hiw-nav-arrows {
+        margin-top: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hiw-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Big Typography Footer */
+#main-footer {
+    background: #0A0A0A;
+    width: 100%;
+    padding: 80px 0 0;
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    overflow: hidden;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+#main-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(245, 197, 24, 0.4),
+        transparent
+    );
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px 64px;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.footer-col--brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-logo {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-logo-dot {
+    color: #F5C518;
+    font-size: 0.6rem;
+    line-height: 1;
+}
+
+.footer-tagline {
+    font-size: 0.88rem;
+    color: #8A8A8A;
+    line-height: 1.7;
+}
+
+.footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 197, 24, 0.06);
+    border: 1px solid rgba(245, 197, 24, 0.15);
+    border-radius: 99px;
+    padding: 6px 14px;
+    width: fit-content;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #F5C518;
+    animation: badgePulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes badgePulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+.footer-badge span:last-child {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #F5C518;
+    letter-spacing: 0.04em;
+}
+
+.footer-col-title {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #777777;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-links a {
+    font-size: 0.88rem;
+    color: #8B8B8B;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background: #F5C518;
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFFFFF;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.footer-divider-line {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    transform-origin: left center;
+    transform: scaleX(0);
+}
+
+.footer-wordmark-wrap {
+    width: 100%;
+    padding: 16px 0 8px;
+    overflow: hidden;
+    cursor: default;
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.footer-wordmark {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    line-height: 0.85;
+    user-select: none;
+}
+
+.wordmark-default,
+.wordmark-filled {
+    display: block;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: clamp(10vw, 14vw, 14vw);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    width: 100%;
+    line-height: 0.88;
+}
+
+.wordmark-default {
+    color: #141414;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.18);
+    position: relative;
+    z-index: 1;
+}
+
+.wordmark-filled {
+    color: #F5C518;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.footer-wordmark:hover .wordmark-filled {
+    clip-path: inset(0 0% 0 0);
+}
+
+.footer-wordmark:hover .wordmark-default {
+    -webkit-text-stroke: 1px rgba(245, 197, 24, 0.15);
+    transition: -webkit-text-stroke 0.4s ease;
+}
+
+.wordmark-letter {
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px 28px;
+    max-width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    opacity: 0;
+}
+
+.footer-copyright {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: #777777;
+    font-weight: 500;
+}
+
+.footer-bottom-sep {
+    color: #444444;
+}
+
+.footer-socials {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777777;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.social-btn:hover {
+    background: rgba(245, 197, 24, 0.1);
+    color: #F5C518;
+    transform: translateY(-2px);
+}
+
+.social-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+}
+
+.wordmark-cursor {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #F5C518;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+.wordmark-cursor span {
+    font-size: 0.55rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1200px) {
+    .wordmark-default,
+    .wordmark-filled {
+        font-size: 14vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .wordmark-default,
+    .wordmark-filled {
+        font-size: 15vw;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        padding: 0 24px 48px;
+    }
+
+    .footer-col--brand {
+        grid-column: span 2;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px 24px 32px;
+        text-align: center;
+    }
+
+    .footer-copyright {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .wordmark-cursor {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .wordmark-default,
+    .wordmark-filled {
+        font-size: 16vw;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-col--brand {
+        grid-column: span 1;
+    }
+}
+
+/* Premium Live Campaign Map */
+#campaign-map-section {
+    background: #0A0A0A;
+    width: 100%;
+    padding: 100px 0 120px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+#campaign-map-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(245, 197, 24, 0.04) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.map-header {
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.map-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #F5C518;
+    margin-bottom: 16px;
+    border-bottom: 1.5px solid #F5C518;
+    padding-bottom: 4px;
+}
+
+.map-title {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+    text-transform: none;
+}
+
+.map-title em {
+    font-style: italic;
+    color: #F5C518;
+}
+
+.map-subtitle {
+    font-size: 1rem;
+    color: #555555;
+    letter-spacing: 0.01em;
+}
+
+.map-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+}
+
+.map-search-wrap {
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.map-search-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 18px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.map-search-inner:focus-within {
+    border-color: rgba(245, 197, 24, 0.4);
+    box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.08);
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    stroke: #555555;
+    flex-shrink: 0;
+}
+
+#citySearch {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+    color: #FFFFFF;
+    font-family: inherit;
+}
+
+#citySearch::placeholder {
+    color: #444444;
+}
+
+.search-clear {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    color: #555555;
+    transition: color 0.2s;
+}
+
+.search-clear:hover {
+    color: #FFFFFF;
+}
+
+.search-clear svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #161616;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.suggestion-item {
+    width: 100%;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    text-align: left;
+}
+
+.suggestion-item:hover {
+    background: rgba(245, 197, 24, 0.06);
+}
+
+.suggestion-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.suggestion-state {
+    display: block;
+    font-size: 0.75rem;
+    color: #555555;
+}
+
+.suggestion-count {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #F5C518;
+}
+
+.map-stats-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.map-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stat-val {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -0.03em;
+}
+
+.stat-lbl {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #444444;
+}
+
+.map-stat-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.map-canvas-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+}
+
+#indiaMapContainer {
+    width: 100%;
+    max-width: 720px;
+    height: 600px;
+    position: relative;
+}
+
+#indiaMapContainer svg {
+    width: 100%;
+    height: 100%;
+}
+
+.india-state {
+    fill: #161616;
+    stroke: #2A2A2A;
+    stroke-width: 0.8;
+    transition: fill 0.3s ease;
+}
+
+.india-state:hover {
+    fill: #1E1E1E;
+    stroke: rgba(245, 197, 24, 0.2);
+}
+
+.india-state.highlighted {
+    fill: rgba(245, 197, 24, 0.06);
+    stroke: rgba(245, 197, 24, 0.3);
+}
+
+.city-pulse-ring {
+    fill: none;
+    stroke: #F5C518;
+    stroke-width: 1.5;
+    opacity: 0.75;
+}
+
+.city-dot-inner {
+    fill: #F5C518;
+    cursor: pointer;
+    transition: r 0.2s ease;
+    filter: url(#dotGlow);
+}
+
+.city-label {
+    fill: #888888;
+    font-size: 8px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    text-anchor: middle;
+    pointer-events: none;
+    user-select: none;
+}
+
+.city-card {
+    position: absolute;
+    width: 260px;
+    background: #111111;
+    border: 1px solid rgba(245, 197, 24, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow:
+        0 0 0 1px rgba(245, 197, 24, 0.05),
+        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(245, 197, 24, 0.05);
+    z-index: 50;
+    flex-direction: column;
+    gap: 16px;
+    transform-origin: bottom left;
+}
+
+.city-card-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555555;
+    transition: background 0.2s, color 0.2s;
+}
+
+.city-card-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+}
+
+.city-card-close svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+}
+
+.city-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.city-card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #F5C518;
+    box-shadow: 0 0 8px rgba(245, 197, 24, 0.6);
+    flex-shrink: 0;
+}
+
+.city-card-name {
+    font-family: 'Inter', 'Helvetica Neue', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: none;
+}
+
+.city-card-state {
+    font-size: 0.72rem;
+    color: #555555;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.city-card-campaigns {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px;
+    background: rgba(245, 197, 24, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(245, 197, 24, 0.1);
+}
+
+.campaigns-count {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #F5C518;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.campaigns-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #444444;
+}
+
+.city-card-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.category-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    padding: 4px 10px;
+}
+
+.city-card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #F5C518;
+    color: #000000;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.city-card-cta:hover {
+    background: #FFD700;
+    transform: translateY(-1px);
+}
+
+.city-card-cta svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
+
+@media (max-width: 768px) {
+    #campaign-map-section {
+        padding: 80px 0 96px;
+    }
+
+    .map-main {
+        padding: 0 18px;
+    }
+
+    #indiaMapContainer {
+        height: 400px;
+    }
+
+    .city-card {
+        width: 220px;
+        padding: 18px;
+    }
+
+    .map-stats-bar {
+        gap: 16px;
+    }
+
+    .stat-val {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-stats-bar {
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .map-stat-divider {
+        display: none;
+    }
+
+    .city-card {
+        position: fixed;
+        bottom: 20px;
+        left: 50% !important;
+        top: auto !important;
+        transform: translateX(-50%);
+    }
+}
+
+/* White theme for Live Campaign Map */
+#campaign-map-section {
+    background:
+        radial-gradient(circle at 50% 42%, rgba(245, 197, 24, 0.12), transparent 34%),
+        linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+}
+
+#campaign-map-section::before {
+    background: radial-gradient(
+        ellipse at center,
+        rgba(245, 197, 24, 0.12) 0%,
+        transparent 68%
+    );
+}
+
+.map-title {
+    color: #090909;
+}
+
+.map-subtitle {
+    color: #6B7280;
+}
+
+.map-search-inner {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 18px 55px rgba(15, 23, 42, 0.08);
+}
+
+.map-search-inner:focus-within {
+    border-color: rgba(245, 197, 24, 0.65);
+    box-shadow:
+        0 0 0 4px rgba(245, 197, 24, 0.14),
+        0 18px 55px rgba(15, 23, 42, 0.1);
+}
+
+.search-icon {
+    stroke: #9CA3AF;
+}
+
+#citySearch {
+    color: #111827;
+}
+
+#citySearch::placeholder {
+    color: #9CA3AF;
+}
+
+.search-clear {
+    color: #9CA3AF;
+}
+
+.search-clear:hover {
+    color: #111827;
+}
+
+.search-suggestions {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.2);
+    opacity: 1;
+    backdrop-filter: none;
+}
+
+.suggestion-item:hover {
+    background: rgba(245, 197, 24, 0.1);
+}
+
+.search-suggestions .suggestion-item {
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(17, 24, 39, 0.06);
+}
+
+.search-suggestions .suggestion-item:last-child {
+    border-bottom: 0;
+}
+
+.search-suggestions .suggestion-item:hover {
+    background: #FFF8D8;
+}
+
+.suggestion-name {
+    color: #111827;
+}
+
+.suggestion-state {
+    color: #6B7280;
+}
+
+.map-stats-bar {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.76);
+    border-radius: 18px;
+    padding: 18px 24px;
+    box-shadow: 0 18px 60px rgba(15, 23, 42, 0.06);
+}
+
+.stat-val {
+    color: #111827;
+}
+
+.stat-lbl {
+    color: #6B7280;
+}
+
+.map-stat-divider {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+#indiaMapContainer {
+    filter: drop-shadow(0 24px 60px rgba(15, 23, 42, 0.12));
+}
+
+.india-state {
+    fill: #F4F4F5;
+    stroke: #D7DAE0;
+}
+
+.india-state:hover {
+    fill: #ECEFF3;
+    stroke: rgba(245, 197, 24, 0.65);
+}
+
+.india-state.highlighted {
+    fill: rgba(245, 197, 24, 0.2);
+    stroke: rgba(245, 197, 24, 0.75);
+}
+
+.city-label {
+    fill: #4B5563;
+}
+
+.city-card {
+    background: #FFFFFF;
+    border-color: rgba(245, 197, 24, 0.45);
+    box-shadow:
+        0 0 0 1px rgba(245, 197, 24, 0.12),
+        0 24px 70px rgba(15, 23, 42, 0.16),
+        0 0 45px rgba(245, 197, 24, 0.12);
+}
+
+.city-card-close {
+    background: rgba(17, 24, 39, 0.05);
+    color: #6B7280;
+}
+
+.city-card-close:hover {
+    background: rgba(17, 24, 39, 0.1);
+    color: #111827;
+}
+
+.city-card-name {
+    color: #111827;
+}
+
+.city-card-state {
+    color: #6B7280;
+}
+
+.city-card-campaigns {
+    background: rgba(245, 197, 24, 0.12);
+    border-color: rgba(245, 197, 24, 0.22);
+}
+
+.campaigns-label {
+    color: #6B7280;
+}
+
+.category-pill {
+    color: #111827;
+    background: rgba(17, 24, 39, 0.04);
+    border-color: rgba(17, 24, 39, 0.08);
 }
