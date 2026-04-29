@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -69,6 +69,7 @@ const opportunities: Opportunity[] = [
 
 function ViewportVideo({ src, className = "" }: { src: string; className?: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -92,17 +93,31 @@ function ViewportVideo({ src, className = "" }: { src: string; className?: strin
   }, []);
 
   return (
-    <video
-      ref={videoRef}
-      className={`h-full w-full object-cover ${className}`}
-      poster={posterSrc}
-      preload="none"
-      muted
-      loop
-      playsInline
-    >
-      <source src={src} type="video/mp4" />
-    </video>
+    <div className="relative h-full w-full overflow-hidden bg-zinc-950">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={posterSrc}
+        alt=""
+        aria-hidden="true"
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          isLoaded ? "opacity-0" : "opacity-100"
+        }`}
+      />
+      <video
+        ref={videoRef}
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        } ${className}`}
+        poster={posterSrc}
+        preload="metadata"
+        muted
+        loop
+        playsInline
+        onLoadedData={() => setIsLoaded(true)}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+    </div>
   );
 }
 

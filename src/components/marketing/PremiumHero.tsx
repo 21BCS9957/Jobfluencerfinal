@@ -4,15 +4,31 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { BadgeCheck, MessageCircle, ShieldCheck, Star } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 const navLinks = ["Product", "Solutions", "Agencies", "Pricing", "Resources"];
 
 const trustItems = [
-  { label: "Meta Business Partner", icon: BadgeCheck },
-  { label: "TikTok Marketing Partner", icon: MessageCircle },
-  { label: "4.8/5 Creator Rating", icon: Star },
-  { label: "Verified Brand Network", icon: ShieldCheck },
+  {
+    label: "Meta Business Partner",
+    logoSrc: "/trust-meta.svg",
+    logoAlt: "Meta logo",
+  },
+  {
+    label: "TikTok Marketing Partner",
+    logoSrc: "/trust-tiktok.svg",
+    logoAlt: "TikTok logo",
+  },
+  {
+    label: "4.8/5 Creator Rating",
+    logoSrc: "/trust-rating.svg",
+    logoAlt: "Trustpilot star logo",
+  },
+  {
+    label: "Verified Brand Network",
+    logoSrc: "/trust-verified.svg",
+    logoAlt: "Verified badge",
+  },
 ];
 
 const heroImage = "/hero-headphones-bench.jpg";
@@ -26,6 +42,7 @@ export default function PremiumHero() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const navTone = Math.round(255 - scrollProgress * 238);
   const navTextColor = `rgb(${navTone}, ${navTone}, ${navTone})`;
+  const navGlassOpacity = 0.08 + scrollProgress * 0.48;
 
   useEffect(() => {
     const updateScrollProgress = () => {
@@ -65,11 +82,13 @@ export default function PremiumHero() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(236,72,153,0.2),transparent_28%),radial-gradient(circle_at_70%_75%,rgba(124,58,237,0.22),transparent_28%)]" />
 
       <header
-        className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-500"
+        className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500"
         style={{
-          backgroundColor: `rgba(255, 255, 255, ${scrollProgress * 0.96})`,
-          borderColor: `rgba(${navTone}, ${navTone}, ${navTone}, ${0.1 + scrollProgress * 0.08})`,
-          boxShadow: `0 18px 45px rgba(0, 0, 0, ${scrollProgress * 0.08})`,
+          backgroundColor: `rgba(255, 255, 255, ${navGlassOpacity})`,
+          borderColor: `rgba(${navTone}, ${navTone}, ${navTone}, ${0.1 + scrollProgress * 0.14})`,
+          boxShadow: `0 18px 55px rgba(15, 23, 42, ${scrollProgress * 0.12})`,
+          backdropFilter: `blur(${scrollProgress * 22}px) saturate(${100 + scrollProgress * 80}%)`,
+          WebkitBackdropFilter: `blur(${scrollProgress * 22}px) saturate(${100 + scrollProgress * 80}%)`,
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
@@ -200,7 +219,7 @@ export default function PremiumHero() {
               initial={{ opacity: 0, y: 10, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 1.1, duration: 0.55, ease: "easeOut" }}
-              className="absolute -bottom-14 left-3 max-w-[15rem] rounded-2xl bg-black/85 px-4 py-3 text-[11px] font-semibold leading-snug text-white shadow-xl sm:left-5 sm:text-[12px]"
+              className="mt-3 max-w-[15rem] rounded-2xl bg-black/85 px-4 py-3 text-[11px] font-semibold leading-snug text-white shadow-xl sm:absolute sm:-bottom-14 sm:left-5 sm:mt-0 sm:text-[12px]"
             >
               Show me creators near my city.
             </motion.div>
@@ -211,11 +230,14 @@ export default function PremiumHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.7, ease: "easeOut" }}
-          className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 opacity-70 grayscale sm:gap-x-7 lg:absolute lg:bottom-8 lg:left-8 lg:mt-12"
+          className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 sm:gap-x-7 lg:absolute lg:bottom-8 lg:left-8 lg:mt-12"
         >
-          {trustItems.map(({ label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-2 text-[12px] font-semibold text-white/80">
-              <Icon className="h-5 w-5" />
+          {trustItems.map(({ label, logoSrc, logoAlt }) => (
+            <div key={label} className="flex items-center gap-2 text-[12px] font-semibold text-white/82">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/12 bg-white/10 shadow-[0_10px_28px_rgba(0,0,0,0.18)] backdrop-blur-md">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={logoSrc} alt={logoAlt} className="h-4 w-4 object-contain" />
+              </span>
               <span>{label}</span>
             </div>
           ))}

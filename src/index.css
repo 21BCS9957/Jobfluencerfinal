@@ -526,7 +526,7 @@ main, .min-h-screen { padding-bottom: 70px; }
 @media (max-width: 767px) {
     .hiw-final-content {
         justify-content: flex-start;
-        padding: 28px 14px 24px;
+        padding: 92px 14px 24px;
         overflow-y: auto;
     }
 
@@ -540,14 +540,14 @@ main, .min-h-screen { padding-bottom: 70px; }
     }
 
     .hiw-heading {
-        font-size: 1.85rem;
-        margin-bottom: 16px;
+        font-size: 1.72rem;
+        margin-bottom: 14px;
     }
 
     .hiw-card {
-        min-height: 170px;
-        padding: 14px;
-        gap: 8px;
+        min-height: 158px;
+        padding: 12px;
+        gap: 7px;
     }
 
     .hiw-card-desc {
