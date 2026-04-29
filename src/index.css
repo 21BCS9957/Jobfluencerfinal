@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 @import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
 
@@ -1579,4 +1580,469 @@ main, .min-h-screen { padding-bottom: 70px; }
     color: #111827;
     background: rgba(17, 24, 39, 0.04);
     border-color: rgba(17, 24, 39, 0.08);
+}
+
+/* Creator Constellation */
+#constellation-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 100px 0 80px;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    background: #FFFFFF;
+}
+
+.constellation-bg {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 70% 45% at 50% 42%, rgba(245, 197, 24, 0.16) 0%, rgba(245, 197, 24, 0.04) 42%, rgba(255, 255, 255, 0) 72%),
+        linear-gradient(180deg, #FFFFFF 0%, #FFFDF6 48%, #FFFFFF 100%);
+    z-index: 0;
+}
+
+#starfieldCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.constellation-header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 0 24px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.constellation-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #F5C518;
+    margin-bottom: 16px;
+}
+
+.eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #F5C518;
+    animation: eyebrowPulse 2s ease infinite;
+}
+
+@keyframes eyebrowPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(245, 197, 24, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(245, 197, 24, 0); }
+}
+
+.constellation-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 700;
+    color: #111827;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    text-transform: none;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+
+.constellation-title em {
+    font-style: italic;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #F5C518;
+}
+
+.constellation-subtitle {
+    font-size: 0.9rem;
+    color: rgba(17, 24, 39, 0.5);
+    line-height: 1.8;
+    font-family: 'Inter', sans-serif;
+}
+
+.constellation-stats {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.c-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.c-stat-num {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.c-stat-lbl {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.42);
+    font-family: 'Inter', sans-serif;
+}
+
+.c-stat-div {
+    width: 1px;
+    height: 36px;
+    background: rgba(17, 24, 39, 0.08);
+}
+
+.constellation-canvas-wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 64px 24px 0;
+    opacity: 1;
+}
+
+.constellation-map-layer {
+    position: absolute;
+    inset: 64px 24px 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.constellation-map-img {
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    height: 92%;
+    width: auto;
+    max-width: 68%;
+    transform: translateX(-50%);
+    opacity: 0.95;
+    filter: drop-shadow(0 18px 35px rgba(245, 197, 24, 0.18));
+}
+
+#constellationCanvas {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 560px;
+    display: block;
+    cursor: crosshair;
+}
+
+.c-city-card {
+    position: absolute;
+    width: 240px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(245, 197, 24, 0.38);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 0 0 1px rgba(245, 197, 24, 0.08), 0 24px 64px rgba(15, 23, 42, 0.16), 0 0 60px rgba(245, 197, 24, 0.12);
+    transform-origin: bottom center;
+}
+
+.c-card-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 0%, rgba(245, 197, 24, 0.06), transparent 60%);
+    pointer-events: none;
+}
+
+.c-card-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(17, 24, 39, 0.04);
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(17, 24, 39, 0.45);
+    transition: all 0.2s ease;
+}
+
+.c-card-close:hover {
+    background: rgba(17, 24, 39, 0.1);
+    color: #111827;
+}
+
+.c-card-close svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+}
+
+.c-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.c-card-star {
+    font-size: 1.2rem;
+    color: #F5C518;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(245, 197, 24, 0.8));
+}
+
+.c-card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: none;
+}
+
+.c-card-header span {
+    font-size: 0.68rem;
+    color: rgba(17, 24, 39, 0.46);
+    font-family: 'Inter', sans-serif;
+}
+
+.c-card-metrics {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(245, 197, 24, 0.04);
+    border: 1px solid rgba(245, 197, 24, 0.08);
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+
+.c-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.c-metric-val {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #F5C518;
+    letter-spacing: -0.04em;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.c-metric-lbl {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.46);
+    font-family: 'Inter', sans-serif;
+}
+
+.c-metric-div {
+    width: 1px;
+    height: 32px;
+    background: rgba(17, 24, 39, 0.08);
+    flex-shrink: 0;
+}
+
+.c-card-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.c-cat-pill {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.62);
+    background: rgba(17, 24, 39, 0.04);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 99px;
+    padding: 3px 9px;
+    font-family: 'Inter', sans-serif;
+}
+
+.c-card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    background: #F5C518;
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 11px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.c-card-cta:hover {
+    background: #FFD700;
+    transform: translateY(-1px);
+}
+
+.c-card-cta svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    stroke-width: 2.5;
+}
+
+.c-search-wrap {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    z-index: 50;
+}
+
+.c-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    stroke: rgba(17, 24, 39, 0.35);
+    pointer-events: none;
+    z-index: 1;
+}
+
+#cSearchInput {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 10px;
+    padding: 11px 14px 11px 38px;
+    font-size: 0.82rem;
+    color: #111827;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px);
+}
+
+#cSearchInput:focus {
+    border-color: rgba(245, 197, 24, 0.3);
+    background: rgba(255, 255, 255, 0.96);
+}
+
+#cSearchInput::placeholder {
+    color: rgba(17, 24, 39, 0.35);
+}
+
+.c-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(17, 24, 39, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 200;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.14);
+}
+
+.c-search-item {
+    width: 100%;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.15s;
+    background: transparent;
+    border: 0;
+    text-align: left;
+}
+
+.c-search-item:hover {
+    background: rgba(245, 197, 24, 0.06);
+}
+
+.c-search-item-name,
+.c-search-item-state {
+    display: block;
+}
+
+.c-search-item-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111827;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.c-search-item-state {
+    font-size: 0.68rem;
+    color: rgba(17, 24, 39, 0.42);
+    font-family: 'Inter', sans-serif;
+}
+
+.c-search-item-count {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #F5C518;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+@media (max-width: 768px) {
+    #constellationCanvas { height: 380px; }
+    .c-city-card { width: 200px; padding: 16px; }
+    .c-search-wrap { width: 220px; }
+    .constellation-stats { gap: 20px; }
+    .c-stat-num { font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+    #constellation-section { padding-top: 80px; }
+    #constellationCanvas { height: 300px; }
+    .constellation-stats { gap: 14px; }
+    .c-stat-div { height: 30px; }
+    .c-stat-lbl { font-size: 0.5rem; letter-spacing: 0.1em; }
+    .c-city-card {
+        position: fixed;
+        bottom: 20px;
+        left: 50% !important;
+        top: auto !important;
+        transform: translateX(-50%);
+        width: calc(100vw - 40px);
+        max-width: 320px;
+    }
 }
