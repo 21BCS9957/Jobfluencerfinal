@@ -1,7 +1,7 @@
 'use client';
 
-import { BrandMyCampaigns } from "@/legacy_pages/dashboard";
+import BrandDashboardOverview from "@/components/dashboard/BrandDashboardOverview";
 
 export default function Page() {
-  return <BrandMyCampaigns />;
+  return <BrandDashboardOverview />;
 }

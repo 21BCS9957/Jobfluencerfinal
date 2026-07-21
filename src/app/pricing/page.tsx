@@ -1,7 +1,7 @@
 'use client';
 
-import PricingPage from "@/legacy_pages/PricingPage";
+import PricingWorkspace from '@/components/pricing/PricingWorkspace';
 
 export default function Page() {
-  return <PricingPage />;
+  return <PricingWorkspace />;
 }

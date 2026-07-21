@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from "react";
-import { RegisterPage } from "@/legacy_pages/AuthPages";
+import { RegisterWorkspace } from '@/components/auth/AuthWorkspace';
 
 export default function Page() {
   return (
     <Suspense fallback={null}>
-      <RegisterPage />
+      <RegisterWorkspace />
     </Suspense>
   );
 }

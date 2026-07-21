@@ -1,7 +1,7 @@
 'use client';
 
-import { BrandMyCampaigns } from "@/legacy_pages/dashboard";
+import BrandCampaignsWorkspace from "@/components/dashboard/brand/BrandCampaignsWorkspace";
 
 export default function Page() {
-  return <BrandMyCampaigns />;
+  return <BrandCampaignsWorkspace />;
 }

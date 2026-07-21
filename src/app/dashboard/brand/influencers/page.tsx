@@ -1,7 +1,7 @@
 'use client';
 
-import { BrandDashboardHome } from "@/legacy_pages/dashboard";
+import BrandCreatorsWorkspace from '@/components/dashboard/brand/BrandCreatorsWorkspace';
 
 export default function Page() {
-  return <BrandDashboardHome />;
+  return <BrandCreatorsWorkspace />;
 }

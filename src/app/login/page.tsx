@@ -1,12 +1,7 @@
 'use client';
 
-import { Suspense } from "react";
-import { LoginPage } from "@/legacy_pages/AuthPages";
+import { LoginWorkspace } from '@/components/auth/AuthWorkspace';
 
 export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <LoginPage />
-    </Suspense>
-  );
+  return <LoginWorkspace />;
 }

@@ -1,0 +1,80 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.mark {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  overflow: visible;
+}
+
+.loop,
+.bridge,
+.cut {
+  shape-rendering: geometricPrecision;
+}
+
+.dark .loop {
+  fill: #f5c518;
+}
+
+.dark .bridge {
+  fill: #e94b9b;
+}
+
+.dark .cut {
+  fill: #101010;
+}
+
+.light .loop {
+  fill: #111;
+}
+
+.light .bridge {
+  fill: #e94b9b;
+}
+
+.light .cut {
+  fill: #fff;
+}
+
+.wordmark {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.wordmark span {
+  font-weight: 520;
+}
+
+.wordmark strong {
+  font-weight: 850;
+}
+
+.wordmark i {
+  width: 4px;
+  height: 4px;
+  margin-left: 3px;
+  background: #f5c518;
+}
+
+.compact {
+  gap: 0;
+}
+
+@media (max-width: 340px) {
+  .wordmark {
+    display: none;
+  }
+}

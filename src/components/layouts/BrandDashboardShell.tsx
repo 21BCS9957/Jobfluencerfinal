@@ -1,25 +1,355 @@
 'use client';
 
-import { ReactNode } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { DashboardHeader, BottomNav } from "@/legacy_pages/dashboard/shared";
+import { ReactNode, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import axios from 'axios';
+import {
+  BarChart3,
+  Bell,
+  BriefcaseBusiness,
+  Check,
+  ChevronRight,
+  CircleUserRound,
+  Crown,
+  Home,
+  MessageSquare,
+  Plus,
+  Search,
+  Sparkles,
+  Trophy,
+  Users,
+  WalletCards,
+} from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { API } from '@/legacy_pages/dashboard/shared';
+import JobfluencerLogo from '@/components/brand/JobfluencerLogo';
+import styles from './BrandDashboardShell.module.css';
+
+type Notification = {
+  id: string | number;
+  title?: string;
+  message?: string;
+  read?: boolean;
+  created_at?: string;
+};
+
+type NavItem = {
+  href: string;
+  label: string;
+  icon: typeof Home;
+  exact?: boolean;
+};
+
+type DashboardAuth = {
+  user: { name?: string; brand_name?: string } | null;
+  loading: boolean;
+  token: string | null;
+  subscription: { plan?: string } | null;
+};
+
+const primaryNavigation: NavItem[] = [
+  { href: '/dashboard/brand', label: 'Overview', icon: Home, exact: true },
+  { href: '/dashboard/brand/campaigns', label: 'Campaigns', icon: BriefcaseBusiness },
+  { href: '/dashboard/brand/influencers', label: 'Find creators', icon: Users },
+  { href: '/dashboard/brand/messages', label: 'Messages', icon: MessageSquare },
+];
+
+const secondaryNavigation: NavItem[] = [
+  { href: '/dashboard/brand/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/dashboard/brand/contests', label: 'Contests', icon: Trophy },
+  { href: '/dashboard/brand/profile', label: 'Brand profile', icon: CircleUserRound },
+];
+
+const mobileNavigation = [
+  primaryNavigation[0],
+  primaryNavigation[1],
+  primaryNavigation[2],
+  primaryNavigation[3],
+  secondaryNavigation[2],
+];
+
+function isRouteActive(pathname: string, item: NavItem) {
+  return item.exact ? pathname === item.href : pathname.startsWith(item.href);
+}
+
+function getPageLabel(pathname: string) {
+  const active = [...primaryNavigation, ...secondaryNavigation].find((item) =>
+    isRouteActive(pathname, item),
+  );
+  if (pathname.includes('/post-job')) return 'Create campaign';
+  return active?.label || 'Hirer workspace';
+}
+
+function timeAgo(date?: string) {
+  if (!date) return '';
+  const seconds = Math.max(0, (Date.now() - new Date(date).getTime()) / 1000);
+  if (seconds < 60) return 'Just now';
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  return `${Math.floor(seconds / 86400)}d ago`;
+}
 
 export default function BrandDashboardShell({ children }: { children: ReactNode }) {
-  const { user, loading } = useAuth();
+  const pathname = usePathname();
+  const { user, loading, token, subscription } = useAuth() as DashboardAuth;
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const notificationsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    async function fetchNotifications() {
+      try {
+        const response = await axios.get(`${API}/notifications`, {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        });
+        if (!active) return;
+        setNotifications(response.data.notifications || []);
+        setUnreadCount(response.data.unread_count || 0);
+      } catch {
+        if (active) {
+          setNotifications([]);
+          setUnreadCount(0);
+        }
+      }
+    }
+
+    fetchNotifications();
+    const interval = window.setInterval(fetchNotifications, 30000);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+    };
+  }, [token]);
+
+  useEffect(() => {
+    function closeOnOutsideClick(event: MouseEvent) {
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target as Node)
+      ) {
+        setNotificationsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', closeOnOutsideClick);
+    return () => document.removeEventListener('mousedown', closeOnOutsideClick);
+  }, []);
+
+  async function markAllRead() {
+    try {
+      await axios.put(
+        `${API}/notifications/read-all`,
+        {},
+        { headers: token ? { Authorization: `Bearer ${token}` } : undefined },
+      );
+      setNotifications((items) => items.map((item) => ({ ...item, read: true })));
+      setUnreadCount(0);
+    } catch {
+      // The notification stays unread when the backend rejects the request.
+    }
+  }
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 border-t-black rounded-full animate-spin" />
+      <div className={styles.loadingScreen}>
+        <JobfluencerLogo theme="dark" compact />
+        <div className={styles.loadingBar} />
       </div>
     );
   }
 
+  const displayName = user?.name || user?.brand_name || 'Your brand';
+  const initials = displayName
+    .split(' ')
+    .map((part: string) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+  const plan = subscription?.plan || 'Free';
+
   return (
-    <div className="min-h-screen bg-white">
-      <DashboardHeader user={user} role="brand" />
-      <main className="pt-16 pb-20 px-4 md:px-8 max-w-3xl mx-auto">{children}</main>
-      <BottomNav role="brand" />
+    <div className={styles.shell}>
+      <aside className={styles.sidebar}>
+        <Link href="/" className={styles.brand} aria-label="Jobfluencer home">
+          <JobfluencerLogo theme="dark" />
+        </Link>
+
+        <div className={styles.workspaceLabel}>Hirer workspace</div>
+        <nav className={styles.sidebarNavigation} aria-label="Hirer dashboard">
+          {primaryNavigation.map((item) => {
+            const Icon = item.icon;
+            const active = isRouteActive(pathname, item);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
+              >
+                <Icon aria-hidden="true" />
+                <span>{item.label}</span>
+                {active && <ChevronRight className={styles.navChevron} aria-hidden="true" />}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className={styles.navDivider} />
+        <nav className={styles.sidebarNavigation} aria-label="Hirer tools">
+          {secondaryNavigation.map((item) => {
+            const Icon = item.icon;
+            const active = isRouteActive(pathname, item);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${styles.navLink} ${active ? styles.navLinkActive : ''}`}
+              >
+                <Icon aria-hidden="true" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className={styles.sidebarFooter}>
+          <Link href="/pricing" className={styles.planCard}>
+            <span className={styles.planIcon}><Crown aria-hidden="true" /></span>
+            <span>
+              <small>{plan} plan</small>
+              <strong>Unlock more reach</strong>
+            </span>
+            <ChevronRight aria-hidden="true" />
+          </Link>
+          <Link href="/dashboard/brand/profile" className={styles.profileLink}>
+            <span className={styles.avatar}>{initials || 'JF'}</span>
+            <span className={styles.profileText}>
+              <strong>{displayName}</strong>
+              <small>View profile</small>
+            </span>
+            <ChevronRight aria-hidden="true" />
+          </Link>
+        </div>
+      </aside>
+
+      <div className={styles.workspace}>
+        <header className={styles.topbar}>
+          <Link href="/" className={styles.mobileBrand} aria-label="Jobfluencer home">
+            <JobfluencerLogo theme="light" />
+          </Link>
+          <div className={styles.pageContext}>
+            <small>Dashboard</small>
+            <strong>{getPageLabel(pathname)}</strong>
+          </div>
+
+          <div className={styles.topbarActions}>
+            <Link
+              href="/dashboard/brand/influencers"
+              className={styles.searchAction}
+              aria-label="Search creators"
+              title="Search creators"
+            >
+              <Search aria-hidden="true" />
+              <span>Search creators</span>
+            </Link>
+            <Link href="/dashboard/brand/post-job" className={styles.createAction}>
+              <Plus aria-hidden="true" />
+              <span>Post campaign</span>
+            </Link>
+
+            <div className={styles.notificationWrap} ref={notificationsRef}>
+              <button
+                type="button"
+                className={styles.iconButton}
+                onClick={() => setNotificationsOpen((open) => !open)}
+                aria-label="Notifications"
+                title="Notifications"
+                aria-expanded={notificationsOpen}
+              >
+                <Bell aria-hidden="true" />
+                {unreadCount > 0 && (
+                  <span className={styles.unreadBadge}>{unreadCount > 9 ? '9+' : unreadCount}</span>
+                )}
+              </button>
+
+              {notificationsOpen && (
+                <div className={styles.notificationPanel}>
+                  <div className={styles.notificationHeader}>
+                    <div>
+                      <small>Updates</small>
+                      <strong>Notifications</strong>
+                    </div>
+                    {unreadCount > 0 && (
+                      <button type="button" onClick={markAllRead}>
+                        <Check aria-hidden="true" /> Mark read
+                      </button>
+                    )}
+                  </div>
+                  <div className={styles.notificationList}>
+                    {notifications.length > 0 ? (
+                      notifications.slice(0, 8).map((notification) => (
+                        <div
+                          key={notification.id}
+                          className={`${styles.notificationItem} ${
+                            notification.read ? '' : styles.notificationUnread
+                          }`}
+                        >
+                          <span className={styles.notificationDot} />
+                          <div>
+                            <strong>{notification.title || 'New update'}</strong>
+                            <p>{notification.message || 'There is new activity in your workspace.'}</p>
+                            <small>{timeAgo(notification.created_at)}</small>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className={styles.notificationEmpty}>
+                        <Sparkles aria-hidden="true" />
+                        <strong>You are all caught up</strong>
+                        <p>Campaign and creator updates will appear here.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/buy-credits"
+              className={styles.walletButton}
+              aria-label="Credits and wallet"
+              title="Credits and wallet"
+            >
+              <WalletCards aria-hidden="true" />
+            </Link>
+            <Link href="/dashboard/brand/profile" className={styles.mobileAvatar}>
+              {initials || 'JF'}
+            </Link>
+          </div>
+        </header>
+
+        <main className={styles.main}>{children}</main>
+      </div>
+
+      <nav className={styles.mobileNavigation} aria-label="Mobile hirer dashboard">
+        {mobileNavigation.map((item) => {
+          const Icon = item.icon;
+          const active = isRouteActive(pathname, item);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.mobileNavLink} ${active ? styles.mobileNavLinkActive : ''}`}
+            >
+              <Icon aria-hidden="true" />
+              <span>{item.label === 'Find creators' ? 'Creators' : item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
     </div>
   );
 }

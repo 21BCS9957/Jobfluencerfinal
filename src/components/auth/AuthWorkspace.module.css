@@ -1,0 +1,182 @@
+.shell {
+  --ink: #111;
+  --muted: #737373;
+  --line: #dfdfdb;
+  --canvas: #f6f6f3;
+  --yellow: #f5c518;
+  --pink: #e94b9b;
+  display: grid;
+  grid-template-columns: minmax(390px, 0.84fr) minmax(520px, 1.16fr);
+  min-height: 100svh;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.shell * { letter-spacing: 0; }
+.shell h1,
+.shell h2 { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; text-transform: none; }
+
+.storyPanel {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100svh;
+  min-height: 680px;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 28px 32px;
+  background: #111;
+  color: #fff;
+}
+.storyPanel::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 5px; background: var(--pink); }
+.storyPanel::after { content: 'JF'; position: absolute; right: -18px; bottom: -72px; color: rgba(255,255,255,0.035); font-size: 250px; font-weight: 900; line-height: 1; }
+.logoLink { position: relative; z-index: 1; align-self: flex-start; color: #fff; text-decoration: none; }
+.storyContent { position: relative; z-index: 1; margin-block: auto; padding-block: 54px; }
+.storyEyebrow,
+.formHeading > span,
+.roleCode,
+.roleBadge small {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #777;
+  font-size: 8px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.12em !important;
+}
+.storyEyebrow::before,
+.formHeading > span::before { content: ''; width: 18px; height: 2px; background: var(--pink); }
+.storyContent h2 { max-width: 620px; margin-top: 13px; color: #fff; font-size: 58px; font-weight: 850; line-height: 0.94; }
+.flowLine { display: flex; max-width: 520px; align-items: center; gap: 10px; margin-top: 34px; color: var(--yellow); }
+.flowLine span { font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.flowLine i { height: 1px; flex: 1; background: #404040; }
+.signalBoard { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 620px; margin-top: 42px; border-block: 1px solid #303030; }
+.signalBoard > div { min-width: 0; padding: 16px 13px 16px 0; }
+.signalBoard > div + div { padding-left: 13px; border-left: 1px solid #303030; }
+.signalBoard span,
+.signalBoard strong,
+.signalBoard small { display: block; }
+.signalBoard span { color: var(--yellow); font-size: 8px; font-weight: 850; }
+.signalBoard strong { margin-top: 8px; font-size: 11px; }
+.signalBoard small { margin-top: 5px; color: #777; font-size: 8px; line-height: 1.4; }
+.storyFooter { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; padding-top: 18px; border-top: 1px solid #303030; }
+.storyFooter > svg { width: 18px; height: 18px; color: var(--yellow); }
+.storyFooter strong,
+.storyFooter small { display: block; }
+.storyFooter strong { font-size: 9px; }
+.storyFooter small { margin-top: 3px; color: #717171; font-size: 8px; }
+
+.formPanel { position: relative; display: flex; min-width: 0; min-height: 100svh; flex-direction: column; padding: 24px clamp(28px, 5vw, 76px) 42px; }
+.panelUtility { display: flex; min-height: 36px; align-items: center; justify-content: flex-end; gap: 12px; color: #898989; font-size: 9px; }
+.panelUtility a { display: inline-flex; align-items: center; gap: 5px; color: #111; font-weight: 800; text-decoration: none; }
+.panelUtility a svg { width: 12px; height: 12px; }
+.formWrap { width: min(100%, 490px); margin: auto; padding-block: 32px; animation: formIn 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+.formWide { width: min(100%, 620px); }
+.registerFormWrap { width: min(100%, 560px); }
+.backAction { display: inline-flex; min-height: 34px; align-items: center; gap: 7px; margin-bottom: 26px; border: 0; padding: 0; background: transparent; color: #666; font-family: inherit; font-size: 9px; font-weight: 750; text-decoration: none; cursor: pointer; }
+.backAction svg { width: 14px; height: 14px; }
+.formHeading { margin-bottom: 24px; }
+.formHeading h1 { margin-top: 9px; font-size: 46px; font-weight: 850; line-height: 0.98; }
+.formHeading p { max-width: 500px; margin-top: 10px; color: #747474; font-size: 10px; line-height: 1.6; }
+
+.socialGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.socialGrid button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: #333; font-family: inherit; font-size: 10px; font-weight: 760; cursor: pointer; transition: border-color 150ms ease, transform 150ms ease; }
+.socialGrid button:hover { border-color: #aaa; transform: translateY(-1px); }
+.socialGrid svg { width: 17px; height: 17px; }
+.divider { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; margin: 20px 0; color: #aaa; }
+.divider i { height: 1px; background: #dededb; }
+.divider span { font-size: 8px; text-transform: uppercase; }
+.errorBanner { margin-bottom: 14px; padding: 11px 12px; border: 1px solid #efc5cc; border-radius: 7px; background: #fff1f4; color: #a61f3d; font-size: 9px; line-height: 1.45; }
+.form { display: grid; gap: 14px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > span:first-child { color: #555; font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em !important; }
+.inputWrap { position: relative; min-width: 0; }
+.inputWrap > svg { position: absolute; top: 50%; left: 13px; z-index: 1; width: 15px; height: 15px; color: #969696; transform: translateY(-50%); pointer-events: none; }
+.inputWrap input,
+.inputWrap select { width: 100%; height: 46px; border: 1px solid #d9d9d5; border-radius: 7px; outline: none; padding: 0 42px 0 40px; background: #fff; color: #111; font-family: inherit; font-size: 10px; transition: border-color 150ms ease, box-shadow 150ms ease; }
+.inputWrap select { appearance: auto; }
+.inputWrap input:focus,
+.inputWrap select:focus { border-color: #90908c; box-shadow: 0 0 0 3px rgba(17,17,17,0.05); }
+.passwordToggle { position: absolute; top: 50%; right: 7px; display: grid; width: 32px; height: 32px; place-items: center; border: 0; border-radius: 6px; background: transparent; color: #777; transform: translateY(-50%); cursor: pointer; }
+.passwordToggle svg { width: 15px; height: 15px; }
+.submitAction { display: grid; grid-template-columns: 18px minmax(0, 1fr) 18px; gap: 8px; width: 100%; min-height: 48px; align-items: center; margin-top: 4px; border: 1px solid #111; border-radius: 7px; padding: 0 14px; background: #111; color: #fff; font-family: inherit; font-size: 10px; font-weight: 800; cursor: pointer; transition: transform 160ms ease, background-color 160ms ease; }
+.submitAction:hover:not(:disabled) { background: #292929; transform: translateY(-1px); }
+.submitAction:disabled { opacity: 0.4; cursor: not-allowed; }
+.submitAction svg { width: 15px; height: 15px; }
+.formFootnote { margin-top: 18px; color: #9a9a9a; font-size: 8px; line-height: 1.5; text-align: center; }
+
+.roleLanes { display: grid; gap: 10px; }
+.roleLane { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr) 24px; gap: 14px; min-height: 156px; align-items: end; overflow: hidden; border: 1px solid #d6d6d2; border-radius: 8px; padding: 20px; color: #111; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.roleLane:hover { transform: translateY(-2px); box-shadow: 0 18px 42px rgba(17,17,17,0.09); }
+.hirerLane { background: var(--yellow); }
+.creatorLane { border-color: #111; background: #111; color: #fff; }
+.roleCode { position: absolute; top: 16px; left: 20px; color: inherit; opacity: 0.55; }
+.roleIcon { display: grid; width: 44px; height: 44px; place-items: center; border-radius: 7px; background: rgba(255,255,255,0.55); }
+.creatorLane .roleIcon { background: #252525; color: var(--yellow); }
+.roleIcon svg { width: 19px; height: 19px; }
+.roleCopy strong,
+.roleCopy small { display: block; }
+.roleCopy strong { max-width: 390px; font-size: 18px; line-height: 1.12; }
+.roleCopy small { margin-top: 7px; font-size: 9px; line-height: 1.45; opacity: 0.62; }
+.roleLane > svg { width: 18px; height: 18px; }
+
+.roleBadge { display: grid; grid-template-columns: 34px minmax(0, 1fr) 18px; gap: 10px; min-height: 54px; align-items: center; margin-bottom: 20px; padding: 9px 12px; border: 1px solid #e6d56e; border-radius: 7px; background: #fff7cd; color: #5e4b00; }
+.roleBadge > svg:first-child { width: 17px; height: 17px; }
+.roleBadge > svg:last-child { width: 14px; height: 14px; }
+.roleBadge small,
+.roleBadge strong { display: block; }
+.roleBadge small { color: #98833a; }
+.roleBadge strong { margin-top: 2px; font-size: 10px; }
+.twoFields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.passwordMeter { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 4px; align-items: center; }
+.passwordMeter i { height: 3px; background: #dededb; transition: background-color 150ms ease; }
+.passwordMeter .meterActive { background: var(--yellow); }
+.passwordMeter small { margin-left: 5px; color: #999; font-size: 7px; }
+.termsRow { display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 9px; align-items: start; color: #666; font-size: 9px; line-height: 1.5; cursor: pointer; }
+.termsRow input { width: 15px; height: 15px; margin-top: 1px; accent-color: #111; }
+.spin { animation: spin 700ms linear infinite; }
+
+@keyframes formIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(310px, 0.7fr) minmax(480px, 1.3fr); }
+  .storyContent h2 { font-size: 45px; }
+  .signalBoard { grid-template-columns: 1fr; }
+  .signalBoard > div { display: grid; grid-template-columns: 24px 80px 1fr; align-items: center; padding: 12px 0; }
+  .signalBoard > div + div { padding-left: 0; border-top: 1px solid #303030; border-left: 0; }
+  .signalBoard strong,
+  .signalBoard small { margin-top: 0; }
+}
+
+@media (max-width: 780px) {
+  .shell { display: block; }
+  .storyPanel { position: relative; height: auto; min-height: 238px; padding: 20px 18px; }
+  .storyPanel::after { right: -8px; bottom: -44px; font-size: 150px; }
+  .storyContent { margin: 30px 0 0; padding: 0; }
+  .storyContent h2 { max-width: 520px; font-size: 34px; }
+  .flowLine { margin-top: 22px; }
+  .signalBoard,
+  .storyFooter { display: none; }
+  .formPanel { min-height: calc(100svh - 238px); padding: 18px 16px 36px; }
+  .panelUtility { min-height: 30px; }
+  .formWrap { padding-block: 26px; }
+}
+
+@media (max-width: 500px) {
+  .panelUtility span { display: none; }
+  .formHeading h1 { font-size: 38px; }
+  .socialGrid { grid-template-columns: 1fr 1fr; }
+  .twoFields { grid-template-columns: 1fr; }
+  .roleLane { min-height: 178px; grid-template-columns: 40px minmax(0, 1fr) 20px; padding: 18px; }
+  .roleCopy strong { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formWrap,
+  .spin { animation: none; }
+  .roleLane,
+  .socialGrid button,
+  .submitAction { transition: none; }
+}

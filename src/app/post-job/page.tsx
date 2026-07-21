@@ -1,7 +1,5 @@
-'use client';
-
-import PostJobWizard from "@/legacy_pages/PostJobWizard";
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  return <PostJobWizard />;
+  redirect('/dashboard/brand/post-job');
 }

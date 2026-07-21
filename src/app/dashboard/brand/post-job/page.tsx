@@ -1,7 +1,7 @@
 'use client';
 
-import { PostJobPage } from "@/legacy_pages/dashboard";
+import BrandCampaignStudio from '@/components/dashboard/brand/BrandCampaignStudio';
 
 export default function Page() {
-  return <PostJobPage />;
+  return <BrandCampaignStudio />;
 }
