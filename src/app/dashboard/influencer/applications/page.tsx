@@ -1,7 +1,5 @@
-'use client';
-
-import { InfluencerApplicationsList } from "@/legacy_pages/JobManagement";
+import CreatorApplicationsWorkspace from '@/components/dashboard/creator/CreatorApplicationsWorkspace';
 
 export default function Page() {
-  return <InfluencerApplicationsList />;
+  return <CreatorApplicationsWorkspace />;
 }

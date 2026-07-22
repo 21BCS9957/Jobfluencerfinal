@@ -1,7 +1,5 @@
-'use client';
-
-import InfluencerProfilePage from "@/legacy_pages/InfluencerProfilePage";
+import CreatorPublicProfileWorkspace from '@/components/creators/CreatorPublicProfileWorkspace';
 
 export default function Page() {
-  return <InfluencerProfilePage />;
+  return <CreatorPublicProfileWorkspace />;
 }

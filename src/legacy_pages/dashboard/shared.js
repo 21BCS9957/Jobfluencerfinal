@@ -10,7 +10,7 @@ import {
     ChevronRight, BarChart3, Trophy, Users, Bell, Check
 } from 'lucide-react';
 
-export const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+export const API = `${process.env.REACT_APP_BACKEND_URL || ''}/api`;
 
 export const CATEGORIES = ["Influencer", "Photographer", "Videographer", "UGC Creator", "Social Media Manager", "Editor"];
 export const PLATFORMS = ["Instagram", "YouTube", "TikTok", "Twitter", "LinkedIn", "Facebook"];

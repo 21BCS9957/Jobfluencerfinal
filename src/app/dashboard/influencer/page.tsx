@@ -1,7 +1,5 @@
-'use client';
-
-import { InfluencerDashboardHome } from "@/legacy_pages/dashboard";
+import CreatorDashboardOverview from '@/components/dashboard/creator/CreatorDashboardOverview';
 
 export default function Page() {
-  return <InfluencerDashboardHome />;
+  return <CreatorDashboardOverview />;
 }

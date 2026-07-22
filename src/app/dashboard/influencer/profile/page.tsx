@@ -1,7 +1,5 @@
-'use client';
-
-import { InfluencerProfile } from "@/legacy_pages/dashboard";
+import CreatorProfileWorkspace from '@/components/dashboard/creator/CreatorProfileWorkspace';
 
 export default function Page() {
-  return <InfluencerProfile />;
+  return <CreatorProfileWorkspace />;
 }

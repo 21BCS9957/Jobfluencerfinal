@@ -1,12 +1,10 @@
-'use client';
-
-import { Suspense } from "react";
-import JobsPage from "@/legacy_pages/JobsPage";
+import { Suspense } from 'react';
+import JobsWorkspace from '@/components/jobs/JobsWorkspace';
 
 export default function Page() {
   return (
     <Suspense fallback={null}>
-      <JobsPage />
+      <JobsWorkspace />
     </Suspense>
   );
 }

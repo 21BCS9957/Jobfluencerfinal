@@ -1,7 +1,5 @@
-'use client';
-
-import { EditInfluencerProfile } from "@/legacy_pages/EditProfilePages";
+import CreatorEditProfileWorkspace from '@/components/dashboard/creator/CreatorEditProfileWorkspace';
 
 export default function Page() {
-  return <EditInfluencerProfile />;
+  return <CreatorEditProfileWorkspace />;
 }

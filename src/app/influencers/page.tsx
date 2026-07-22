@@ -1,12 +1,10 @@
-'use client';
-
-import { Suspense } from "react";
-import InfluencersPage from "@/legacy_pages/InfluencersPage";
+import { Suspense } from 'react';
+import CreatorDirectoryWorkspace from '@/components/creators/CreatorDirectoryWorkspace';
 
 export default function Page() {
   return (
     <Suspense fallback={null}>
-      <InfluencersPage />
+      <CreatorDirectoryWorkspace />
     </Suspense>
   );
 }

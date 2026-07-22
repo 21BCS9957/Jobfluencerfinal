@@ -1,7 +1,5 @@
-'use client';
-
-import AnalyticsPage from "@/legacy_pages/AnalyticsPage";
+import CreatorAnalyticsWorkspace from '@/components/dashboard/creator/CreatorAnalyticsWorkspace';
 
 export default function Page() {
-  return <AnalyticsPage />;
+  return <CreatorAnalyticsWorkspace />;
 }

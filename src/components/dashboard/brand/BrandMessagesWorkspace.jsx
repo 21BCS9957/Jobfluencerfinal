@@ -54,7 +54,7 @@ function formatConversationTime(value) {
   return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
 }
 
-export default function BrandMessagesWorkspace() {
+export default function BrandMessagesWorkspace({ workspaceRole = 'brand' }) {
   const { user, token } = useAuth();
   const searchParams = useSearchParams();
   const requestedPartnerId = searchParams.get('to');
@@ -82,26 +82,27 @@ export default function BrandMessagesWorkspace() {
   }, [headers]);
 
   const fetchPartner = useCallback(async (id) => {
-    try {
-      const response = await axios.get(`${API}/creators/${id}`, { headers });
-      const data = response.data?.creator || response.data;
-      return {
-        id,
-        name: data.display_name || data.name || 'Creator',
-        role: 'creator',
-        profile_image_url: data.profile_image_url,
-      };
-    } catch {
+    const endpoints = workspaceRole === 'creator'
+      ? [{ path: 'brands', role: 'brand' }, { path: 'creators', role: 'creator' }]
+      : [{ path: 'creators', role: 'creator' }, { path: 'brands', role: 'brand' }];
+
+    for (const endpoint of endpoints) {
       try {
-        const response = await axios.get(`${API}/brands/${id}`, { headers });
-        const data = response.data?.brand || response.data;
-        return { id, name: data.company_name || data.name || 'Brand', role: 'brand', logo_url: data.logo_url };
-      } catch (error) {
-        console.error('Error fetching message partner:', error);
-        return null;
+        const response = await axios.get(`${API}/${endpoint.path}/${id}`, { headers });
+        const data = response.data?.creator || response.data?.brand || response.data;
+        return {
+          id,
+          name: data.display_name || data.company_name || data.name || (endpoint.role === 'brand' ? 'Brand' : 'Creator'),
+          role: endpoint.role,
+          profile_image_url: data.profile_image_url,
+          logo_url: data.logo_url,
+        };
+      } catch {
+        // Try the second partner type when the first endpoint has no match.
       }
     }
-  }, [headers]);
+    return null;
+  }, [headers, workspaceRole]);
 
   const fetchMessages = useCallback(async (id) => {
     if (!id) return;
@@ -183,12 +184,12 @@ export default function BrandMessagesWorkspace() {
   };
 
   return (
-    <div className={styles.page} data-testid="brand-messages-workspace">
+    <div className={styles.page} data-testid={`${workspaceRole}-messages-workspace`}>
       <header className={styles.header}>
         <div className={styles.headingGroup}>
-          <div className={styles.kicker}>Conversation desk</div>
-          <h1 className={styles.title}>Keep the work moving.</h1>
-          <p className={styles.lead}>Campaign conversations, creator details, and the next decision in one quiet workspace.</p>
+          <div className={styles.kicker}>{workspaceRole === 'creator' ? 'Collaboration inbox' : 'Conversation desk'}</div>
+          <h1 className={styles.title}>{workspaceRole === 'creator' ? 'Keep every collaboration clear.' : 'Keep the work moving.'}</h1>
+          <p className={styles.lead}>{workspaceRole === 'creator' ? 'Brand conversations, brief context, and next steps in one calm creator workspace.' : 'Campaign conversations, creator details, and the next decision in one quiet workspace.'}</p>
         </div>
       </header>
 
@@ -214,7 +215,7 @@ export default function BrandMessagesWorkspace() {
           ) : visibleConversations.length === 0 ? (
             <div className={styles.conversationEmpty}>
               <div>
-                <p>{query ? 'No thread matches that search.' : 'No conversations yet. Start from the creator index.'}</p>
+                <p>{query ? 'No thread matches that search.' : workspaceRole === 'creator' ? 'No conversations yet. Start from a brief or application.' : 'No conversations yet. Start from the creator index.'}</p>
               </div>
             </div>
           ) : (
@@ -269,7 +270,7 @@ export default function BrandMessagesWorkspace() {
                 </span>
                 <div className={styles.threadHeaderCopy}>
                   <strong>{selectedPartner.name || selectedPartner.display_name || 'Creator'}</strong>
-                  <span>{selectedPartner.role || 'creator'} conversation</span>
+                  <span>{selectedPartner.role || (workspaceRole === 'creator' ? 'brand' : 'creator')} conversation</span>
                 </div>
               </header>
 
@@ -279,7 +280,7 @@ export default function BrandMessagesWorkspace() {
                     <div>
                       <div className={styles.threadEmptyMark}><MessageSquareText /></div>
                       <h2>Start with a clear hello.</h2>
-                      <p>Share the brief, confirm the fit, or pick up the next campaign detail.</p>
+                      <p>{workspaceRole === 'creator' ? 'Confirm the scope, ask the useful question, or pick up the next delivery detail.' : 'Share the brief, confirm the fit, or pick up the next campaign detail.'}</p>
                     </div>
                   </div>
                 ) : messages.map((message, index) => {

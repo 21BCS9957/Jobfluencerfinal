@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from "react";
-import MessagesPage from "@/legacy_pages/MessagesPage";
+import BrandMessagesWorkspace from '@/components/dashboard/brand/BrandMessagesWorkspace';
 
 export default function Page() {
   return (
     <Suspense fallback={null}>
-      <MessagesPage />
+      <BrandMessagesWorkspace workspaceRole="creator" />
     </Suspense>
   );
 }

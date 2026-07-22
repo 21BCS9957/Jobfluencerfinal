@@ -1,7 +1,5 @@
-'use client';
-
-import { InfluencerMyJobs } from "@/legacy_pages/dashboard";
+import CreatorApplicationsWorkspace from '@/components/dashboard/creator/CreatorApplicationsWorkspace';
 
 export default function Page() {
-  return <InfluencerMyJobs />;
+  return <CreatorApplicationsWorkspace defaultView="hired" title="My work" />;
 }

@@ -1,7 +1,5 @@
-'use client';
-
-import JobDetailPage from "@/legacy_pages/JobDetailPage";
+import JobDetailWorkspace from '@/components/jobs/JobDetailWorkspace';
 
 export default function Page() {
-  return <JobDetailPage />;
+  return <JobDetailWorkspace />;
 }
